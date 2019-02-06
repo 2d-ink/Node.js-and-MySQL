@@ -18,7 +18,7 @@ connection.connect(function(err){
 var makeTable = function(){
     connection.query("SELECT * FROM products", function(err,res){
         for(var i=0; i<res.length; i++){
-            console.log(res[i].itemid+" || "+res[i].productname+" || "+res[i].departmentname+" || "+res[i].price+" || "+res[i].stockquality+"\n");
+            console.log(res[i].itemid+" || "+res[i].productname+" || "+res[i].departmentname+" || "+res[i].price+" || "+res[i].stockquantity+"\n");
         }
         promoptCustomer(res);
     })
@@ -53,8 +53,8 @@ var promoptCustomer = function(res){
                     }
 
                 }).then(function(answer){
-                    if((res[id].stockquality-answer.quant)>0){
-                        connection.query("UPDATE proucts SET stock_quality='" + (res[id].stockquality-answer.quant)+"' WHERE product_name'"+product +"'", function (err, res2){
+                    if((res[id].stockquantity-answer.quant)>0){
+                        connection.query("UPDATE proucts SET stock_quality='" + (res[id].stockquantity-answer.quant)+"' WHERE product_name'"+product +"'", function (err, res2){
                             console.log("Product Bought!");
                             makeTable();
                         })
